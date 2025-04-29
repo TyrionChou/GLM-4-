@@ -3,11 +3,17 @@
 GLM-4模型微调教程
 1、 环境配置
     我的系统环境是:
+
     OS: Ubuntu 20.04
+
     Memory: 512GB
+
     Python: 3.12.7
+
     CUDA Version: 12.4
+
     GPU Driver: 550.67
+
     GPU: NVIDIA GeForce RTX 3090 24G
     
     1）官方代码下载
