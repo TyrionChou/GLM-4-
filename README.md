@@ -20,6 +20,7 @@ GLM-4模型微调教程
     经过上述步骤后，可以进入inference文件夹，修改trans_cli_demo.py中MODEL_PATH = "THUDM/GLM-4-9B-0414"的路径为自己的模型路径，运行python trans_cli_demo.py，就可以在终端进行对话测试了
 2、 微调准确
     1）数据准备，从https://huggingface.co/datasets/qgyd2021/chinese_ner_sft/tree/main/data下载的是一个公开的命名实体识别数据集ccfbdci.jsonl，需要将数据格式转化为
+
     {
       "message":[
       {
