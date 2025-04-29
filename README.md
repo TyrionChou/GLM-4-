@@ -1,7 +1,9 @@
 # GLM-4模型微调教程
 
 GLM-4模型微调教程
+
 1、 环境配置
+
     我的系统环境是:
 
     OS: Ubuntu 20.04
@@ -49,4 +51,4 @@ GLM-4模型微调教程
     刚开始训练过程中可能会遇到No module named mpi4py自行安装即可，
     评测计算blue值过程中可能会遇到nltk版本和python3.12不兼容的问题，通过删除bleu_score.py中两处_normalize=Truej即可
 3、 微调部署
-    训练好后，代码可以
+    训练好后，可以直接通过python trans_cli_demo.py调用模型
