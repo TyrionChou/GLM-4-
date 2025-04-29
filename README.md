@@ -46,9 +46,10 @@ GLM-4模型微调教程
       }
       ]
     }
-    2) 调整运行参数，调整finetune文件夹config/lora.yaml中的参数，减少max_input_length、max_output_lenghth为128， training_args中使用混合精度训练设置bf16：True，添加梯度检查点，用时间换显存设置gradient_checkpointing: true，运行
-    CUDA_VISIBLE_DEVICES="0" python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml即可
-    刚开始训练过程中可能会遇到No module named mpi4py自行安装即可，
-    评测计算blue值过程中可能会遇到nltk版本和python3.12不兼容的问题，通过删除bleu_score.py中两处_normalize=Truej即可
+    2) 调整运行参数，调整finetune文件夹config/lora.yaml中的参数，
+        减少max_input_length、max_output_lenghth为128， training_args中使用混合精度训练设置bf16：True，添加梯度检查点，用时间换显存设置gradient_checkpointing: true，运行CUDA_VISIBLE_DEVICES="0" python finetune.py  data/AdvertiseGen/  THUDM/GLM-4-9B-0414  configs/lora.yaml即可
+        刚开始训练过程中可能会遇到No module named mpi4py自行安装即可，
+        评测计算blue值过程中可能会遇到nltk版本和python3.12不兼容的问题，通过删除bleu_score.py中两处_normalize=Truej即可
 3、 微调部署
+
     训练好后，可以直接通过python trans_cli_demo.py调用模型
