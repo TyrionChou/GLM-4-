@@ -60,3 +60,5 @@ GLM-4模型微调教程
 3、 微调部署
 
     训练好后，可以直接通过python trans_cli_demo.py调用模型
+tips:
+在训练时适当降低学习率和max_grad_norm可以使模型训练更加稳定
