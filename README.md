@@ -62,3 +62,9 @@ GLM-4模型微调教程
     训练好后，可以直接通过python trans_cli_demo.py调用模型
 tips:
 在训练时适当降低学习率和max_grad_norm可以使模型训练更加稳定
+
+微调前结果：
+![微信图片_20250430151443](https://github.com/user-attachments/assets/2a2ce6e3-66a8-4d73-a080-fdb8a30d8162)
+微调后结果：
+![微信图片_20250430151448](https://github.com/user-attachments/assets/97b86127-171c-47c9-843d-17f171d16c7e)
+
