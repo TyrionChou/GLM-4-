@@ -1,0 +1,105 @@
+1. 数据配置 (data_config)
+train_file: train.jsonl
+训练数据文件路径，格式为JSON Lines（每行一个JSON对象）。
+
+val_file: dev.jsonl
+验证数据文件路径。
+
+test_file: dev.jsonl
+测试数据文件路径（此处与验证集相同，可能是复用验证集进行测试）。
+
+num_proc: 1
+数据预处理时使用的进程数（设置为1可能是为了避免内存不足问题）。
+
+2. 通用训练配置
+combine: True
+是否将输入和输出拼接成一个序列（例如，在生成任务中将问题与答案合并）。
+
+freezeV: True
+是否冻结模型的视觉部分（如果模型包含视觉模块，但当前配置可能是纯文本模型，需结合具体模型确认）。
+
+max_input_length: 512
+输入文本的最大长度（超出部分会被截断）。
+
+max_output_length: 512
+输出文本的最大长度（控制生成内容的长短）。
+
+# swanlab: "local"
+实验跟踪工具配置（注释状态，若启用会将日志上传到SwanLab云平台）。
+
+3. 训练参数 (training_args)
+output_dir: ./output
+训练输出目录（保存模型、日志、检查点等）。
+
+max_steps: 3000
+最大训练步数（若未设置num_train_epochs，则以此为准）。
+
+learning_rate: 5e-4
+学习率（LoRA微调通常使用较低学习率）。
+
+per_device_train_batch_size: 1
+每个设备的训练批次大小（显存不足时需调小）。
+
+dataloader_num_workers: 16
+数据加载的并行工作进程数（值越大加载越快，但需足够CPU资源）。
+
+remove_unused_columns: false
+是否移除数据集中未使用的列（设为false以保留原始数据字段）。
+
+save_strategy: steps
+保存策略（按步数保存）。
+
+save_steps: 500
+每500步保存一次检查点。
+
+log_level: info
+日志级别（info会输出关键训练信息）。
+
+logging_strategy: steps
+按步数记录日志。
+
+logging_steps: 10
+每10步记录一次日志。
+
+run_name: "glm4-lora-finetune"
+实验名称（用于日志和跟踪）。
+
+per_device_eval_batch_size: 4
+每个设备的评估批次大小。
+
+eval_strategy: steps
+按步数进行评估。
+
+eval_steps: 500
+每500步进行一次验证集评估。
+
+predict_with_generate: true
+在评估时使用生成模式（适用于文本生成任务）。
+
+generation_config
+生成配置：
+
+  max_new_tokens: 512
+  生成内容的最大token数（与max_output_length一致）。
+  
+  deepspeed: configs/ds_zero_2.json
+  使用DeepSpeed的Zero Stage 2配置（优化显存和分布式训练）。
+  
+4. PEFT/LoRA配置 (peft_config)
+peft_type: LORA
+使用LoRA（低秩自适应）进行参数高效微调。
+
+task_type: CAUSAL_LM
+任务类型为因果语言模型（如GPT类模型）。
+
+r: 8
+LoRA的秩（低秩矩阵的维度，值越小参数量越少）。
+
+lora_alpha: 32
+LoRA的缩放因子（控制低秩矩阵的权重更新强度）。
+
+lora_dropout: 0.1
+LoRA层的Dropout率（防止过拟合）。
+
+target_modules: ["q_proj", "k_proj", "v_proj"]
+对模型的查询（Query）、键（Key）、值（Value）投影层应用LoRA。
